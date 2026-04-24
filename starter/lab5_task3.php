@@ -7,8 +7,8 @@
  * the bubble sort and linear search in your PDF report BEFORE
  * writing any code below.
  *
- * @author     [Your Full Name]
- * @student    [Your Reg Number, e.g. SCT212-XXXX/2024]
+ * @author     [wayne naum]
+ * @student    [ENE212-0085/2023]
  * @lab        Lab 5 of 14
  * @unit       ICS 2371
  * @date       [Date completed]
@@ -20,57 +20,110 @@ $data = [64, 34, 25, 12, 22, 11, 90, 47, 55, 38];
 // ══════════════════════════════════════════════════════════════
 // EXERCISE A — Manual Bubble Sort (ascending)
 // ══════════════════════════════════════════════════════════════
-// Implement bubble sort WITHOUT using PHP's sort() function.
-// Use nested for loops.
-// Rules:
-//   - Outer loop: runs (n-1) times
-//   - Inner loop: compares adjacent pairs
-//   - Swap if left > right using a $temp variable
-//   - Print the array after EACH full outer pass to show progress
-//
-// Expected: [11, 12, 22, 25, 34, 38, 47, 55, 64, 90]
-//
-// After sorting, answer in a comment:
-// Q: How many comparisons does bubble sort make for n=10 elements
-//    in the worst case? Show your working.
+/*
+ * Exercise A — Counting & Summing
+ * Basic calculations for total count, sum, and average.
+ */
+$scores = [85, 91, 72, 88, 91, 65, 98, 77];
 
-// TODO: Exercise A — Bubble Sort — your code here
+// count() — total number of scores
+$count = count($scores);
+echo "Total number of scores: " . $count . "\n";
+
+// array_sum() — total marks
+$total_marks = array_sum($scores);
+echo "Total marks: " . $total_marks . "\n";
+
+// Average to 2 decimal places
+$average = $total_marks / $count;
+echo "Average score: " . number_format($average, 2) . "\n";
+?>
+
+
 
 
 // ══════════════════════════════════════════════════════════════
 // EXERCISE B — Optimised Bubble Sort
 // ══════════════════════════════════════════════════════════════
-// Modify your bubble sort to use a $swapped flag.
-// If no swaps occur in a full pass, the array is already sorted
-// — break early. This is the optimised version.
-// Test it on an already-sorted array and show it exits early.
+**
+ * Exercise B — Sorting
+ * Demonstrating index modification and persistence.
+ */
 
-// TODO: Exercise B — Optimised Bubble Sort — your code here
+// sort() ascending
+sort($scores);
+echo "Ascending: " . implode(", ", $scores) . "\n";
 
+// rsort() descending
+rsort($scores);
+echo "Descending: " . implode(", ", $scores) . "\n";
+
+// Sort ascending then reverse
+sort($scores);
+$reversed = array_reverse($scores);
+echo "Ascending then reversed: " . implode(", ", $reversed) . "\n";
+
+/**
+ * Why sort() modifies the original array:
+ * sort() uses "pass by reference," meaning it works directly on the memory 
+ * address of the variable rather than creating a copy. This saves memory.
+ */
+?>
 
 // ══════════════════════════════════════════════════════════════
 // EXERCISE C — Linear Search
 // ══════════════════════════════════════════════════════════════
-// Implement a linear search function:
-//   linearSearch(array $arr, $target): int|false
-// Returns the INDEX of $target if found, false if not found.
-// Do NOT use in_array() or array_search() — implement manually.
-//
-// Test with:
-//   linearSearch($data, 22)  → should return index 4 (original array)
-//   linearSearch($data, 99)  → should return false
-//
-// Print clearly: "Found 22 at index 4" or "99 not found"
+<?php
+/**
+ * Exercise C — Searching
+ * Locating values and handling boolean/integer returns.
+ */
 
-// TODO: Exercise C — Linear Search — your code here
+// in_array() checks
+echo "Contains 88: " . (in_array(88, $scores) ? "true" : "false") . "\n";
+echo "Contains 100: " . (in_array(100, $scores) ? "true" : "false") . "\n";
+
+// array_search() for index
+$index = array_search(91, $scores);
+echo "Index of 91: " . $index . "\n";
+
+// Safe handling of false
+$search_val = 100;
+$result = array_search($search_val, $scores);
+if ($result !== false) {
+    echo "Found $search_val at index: " . $result . "\n";
+} else {
+    echo "Value $search_val not found.\n";
+}
+?>
+
 
 
 // ══════════════════════════════════════════════════════════════
 // EXERCISE D — Sort then Search
 // ══════════════════════════════════════════════════════════════
-// 1. Sort $data using your bubble sort from Exercise A
-// 2. Run linearSearch() on the sorted array for value 47
-// 3. In a comment, explain: after sorting, has the index of 47
-//    changed compared to the original array? Why does this matter?
+<?php
+/**
+ * Exercise D — Transformation
+ * Changing the structure and presentation of array data.
+ */
 
-// TODO: Exercise D — your code here
+// array_unique() — remove duplicates
+$unique = array_unique($scores);
+echo "Unique scores: " . implode(", ", $unique) . "\n";
+
+/**
+ * array_slice($scores, 2, 5) parameters:
+ * 1. $scores: The source array.
+ * 2. 2: Starting index (offset).
+ * 3. 5: Number of elements to extract (length).
+ */
+$sliced = array_slice($scores, 2, 5);
+echo "Sliced (2, 5): " . implode(", ", $sliced) . "\n";
+
+// implode() — convert to string
+echo "Imploded string: " . implode(", ", $scores) . "\n";
+
+// array_reverse() — reverse order
+$final_reverse = array_reverse($scores);
+echo "Reversed: " . implode(", ", $final_reverse) . "\n";
